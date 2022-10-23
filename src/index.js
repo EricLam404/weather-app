@@ -1,7 +1,8 @@
 import './style.css';
 import createHeader from "./modules/header";
-import createWeatherCard from './modules/weatherDomEvents';
-
-createWeatherCard("Brooklyn");
+import {createLocationForm , createWeatherCard} from './modules/domElements';
 
 createHeader();
+createLocationForm();
+
+createWeatherCard("Brooklyn");
