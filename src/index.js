@@ -5,4 +5,4 @@ import {createLocationForm , createWeatherCard} from './modules/domElements';
 createHeader();
 createLocationForm();
 
-createWeatherCard("Brooklyn");
+//createWeatherCard("Brooklyn");

@@ -27,7 +27,7 @@ body {
     align-items: center;
 }
 
-.form-container {
+.form {
     display: flex;
     gap: 5px;
     align-items: center;
@@ -40,6 +40,15 @@ body {
     background: none;
     padding: 5px;
     border: 1px solid black;
+}
+
+.form-error-message {
+    display: none;
+    color: red;
+}
+
+.error{
+    display: block;
 }
 
 .submit {

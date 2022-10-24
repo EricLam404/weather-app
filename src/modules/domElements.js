@@ -13,8 +13,11 @@ async function createWeatherCard(city){
 }
 
 function createLocationForm(){
+    const container = document.createElement('div');
+    container.classList.add('form-container');
+
     const form = document.createElement('form');
-    form.classList.add("form-container");
+    form.classList.add("form");
 
     const location_label = document.createElement('label');
     location_label.setAttribute('for', 'location');
@@ -35,8 +38,12 @@ function createLocationForm(){
         resetForm();
     });
     form.append(location_label, location, submitButton());
-    
-    document.body.appendChild(form);
+
+    const errMessage = document.createElement('div');
+    errMessage.classList.add('form-error-message');
+    errMessage.textContent = "Please enter a valid location in the form of city, country, city or country";
+    container.append(form, errMessage);
+    document.body.appendChild(container);
 }
 
 function submitButton(){
@@ -52,7 +59,7 @@ function submitButton(){
 }
 
 function resetForm(){
-    let form = document.querySelector('.form-container');
+    let form = document.querySelector('.form');
     form.reset();
 }
 
