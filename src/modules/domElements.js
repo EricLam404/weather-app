@@ -1,15 +1,29 @@
 import { getWeatherCity } from "./weather";
 import searchIcon from "./imgs/search.svg"
 
+function createMainContainer(){
+    const container = document.createElement('div');
+    container.classList.add('main-container');
+
+    console.log("l");
+    document.body.append(container);
+}
+
 async function createWeatherCard(city){
+    const container = document.querySelector('.main-container');
+
+    console.log(container.firstChild);
     const card = document.createElement('div');
+    card.classList.add('card');
+
     const content = document.createElement('div');
+    content.classList.add('card-content');
 
     let weather = await getWeatherCity(city);
 
     console.log(weather);
     card.append(content);
-
+    container.append(card);
 }
 
 function createLocationForm(){
@@ -43,7 +57,9 @@ function createLocationForm(){
     errMessage.classList.add('form-error-message');
     errMessage.textContent = "Please enter a valid location in the form of city, country, city or country";
     container.append(form, errMessage);
-    document.body.appendChild(container);
+
+    let header = document.querySelector('.header');
+    header.appendChild(container);
 }
 
 function submitButton(){
@@ -63,4 +79,4 @@ function resetForm(){
     form.reset();
 }
 
-export {createLocationForm, createWeatherCard};
+export {createMainContainer, createLocationForm, createWeatherCard};

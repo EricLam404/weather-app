@@ -14,7 +14,7 @@ body {
 
 .header {
     background-color: #333;
-    color: white;
+    color: rgb(212, 212, 212);
     position: fixed;
     top: 0;
     left: 0;
@@ -23,8 +23,9 @@ body {
     height: 50px;
     
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    padding: 30px;
 }
 
 .form {
@@ -39,12 +40,17 @@ body {
     flex: 1;
     background: none;
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid rgb(161, 161, 161);
+    border-radius: 10px;
 }
 
 .form-error-message {
     display: none;
     color: red;
+}
+
+.form input {
+    color: #eee;
 }
 
 .error{

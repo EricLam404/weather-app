@@ -12,7 +12,6 @@ async function getWeatherCity(city){
     try {
         const message = document.querySelector(".form-error-message");
         message.classList.remove('error');
-        console.log(message);
 
         const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&units=imperical&appid=5ce2662ff0808ea4779ba9697ff5dd33`, {mode: 'cors'});
         const weather = await response.json();
@@ -22,9 +21,7 @@ async function getWeatherCity(city){
         console.log("Error 1: " + err);
 
         const message = document.querySelector('.form-error-message');
-        message.classList.add('error');
-        console.log(message);
-        
+        message.classList.add('error');        
     }
 }
 
