@@ -5,3 +5,4 @@ You can enter a valid location and it will tell you the weather data from that l
 Used HTML, CSS and JS
 
 # Live Link
+https://ericlam404.github.io/weather-app/
