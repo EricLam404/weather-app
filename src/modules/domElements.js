@@ -44,9 +44,6 @@ function createMainContainer(){
 async function createWeatherCard(city){
     const container = document.querySelector('.main-container');
 
-    if(container.firstChild){
-        container.removeChild(container.firstChild);
-    }
     const card = document.createElement('div');
     card.classList.add('card');
     card.append(addChangeTemp());
@@ -58,6 +55,9 @@ async function createWeatherCard(city){
     let weather = await getWeatherCity(city);
 
     if(weather){
+        if(container.firstChild){
+            container.removeChild(container.firstChild);
+        }
         let data = {
             name: weather.name + ", " + weather.sys.country, 
             weather: weather.weather[0].description[0].toUpperCase() + weather.weather[0].description.substring(1), 
@@ -83,10 +83,9 @@ async function createWeatherCard(city){
         }
 
         document.body.style.backgroundImage = bgWeathers[weather.weather[0].main];
+        card.append(content);
+        container.append(card);
     }
-    console.log(weather);
-    card.append(content);
-    container.append(card);
 }
 
 function addChangeTemp(){
