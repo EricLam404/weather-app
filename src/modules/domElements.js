@@ -49,6 +49,7 @@ async function createWeatherCard(city){
     }
     const card = document.createElement('div');
     card.classList.add('card');
+    card.append(addChangeTemp());
 
     const content = document.createElement('div');
     content.classList.add("card-contents");
@@ -59,28 +60,82 @@ async function createWeatherCard(city){
     if(weather){
         let data = {
             name: weather.name + ", " + weather.sys.country, 
-            weather: "Weather: " + weather.weather[0].description[0].toUpperCase() + weather.weather[0].description.substring(1), 
-            temp: "Temperature: " + weather.main.temp, 
-            feels: "Feels like: " + weather.main.feels_like, 
-            humidity: "Humidity: " + weather.main.humidity, 
-            pressure: "Pressure: " + weather.main.pressure, 
-            windSpeed: "Wind Speed: " + weather.wind.speed, 
-            windDeg: "Wind Degrees: " + weather.wind.deg
+            weather: weather.weather[0].description[0].toUpperCase() + weather.weather[0].description.substring(1), 
+            temperature: weather.main.temp + "°F", 
+            ["feels Like"]: weather.main.feels_like + "°F", 
+            humidity: weather.main.humidity + "%", 
+            pressure: weather.main.pressure + "mb", 
+            ["wind Speed"]: weather.wind.speed + "mph", 
+            ["wind Degrees"]: weather.wind.deg + "°"
         };
 
         for(const property in data){
             let element = document.createElement('div');
-            element.classList.add(property);
-            element.textContent = data[property];
+            element.classList.add(property.split(' ').join(''));
+            if(property !== "name"){
+                element.textContent = property[0].toUpperCase() + property.substring(1) + ": " + data[property];
+            }
+            else{
+                element.textContent = data[property];
+            }
+        
             content.append(element);
         }
-        
+
         document.body.style.backgroundImage = bgWeathers[weather.weather[0].main];
-        console.log(content);
     }
     console.log(weather);
     card.append(content);
     container.append(card);
+}
+
+function addChangeTemp(){
+    const button = document.createElement('label');
+    button.classList.add("toggle");
+
+    const name = document.createElement("span");
+    name.classList.add("temp");
+    name.textContent = "°F";
+
+    const box = document.createElement("input");
+    box.setAttribute("type", "checkbox");
+    box.classList.add("check")
+    box.addEventListener('click', (e) => {
+        const temp = document.querySelector(".temperature");
+        const split = temp.textContent.split(" ");
+        const tempName = split[0]
+        const temperature = split[1].split("°");
+
+        const feelsTemp = document.querySelector(".feelsLike");
+        const feelsSplit = feelsTemp.textContent.split(" ");
+        const feelsTempName = feelsSplit[0] + " " + feelsSplit[1];
+        const feelsTemperature = feelsSplit[2].split("°");
+
+        if(e.target.checked){
+            name.textContent = "°C";
+            temp.textContent = tempName + " " + convertToC(temperature[0]).toFixed(2) + "°C";
+            feelsTemp.textContent = feelsTempName + " " + convertToC(feelsTemperature[0]).toFixed(2) + "°C";
+        }
+        else{
+            name.textContent = "°F";
+            temp.textContent = tempName + " " + convertToF(temperature[0]).toFixed(2) + "°F";
+            feelsTemp.textContent = feelsTempName + " " + convertToF(feelsTemperature[0]).toFixed(2) + "°F";
+        }
+    });
+
+    const slider = document.createElement("span");
+    slider.classList.add("slider");
+
+    button.append(name, box, slider);
+    return button;
+}
+
+function convertToF(C){
+    return C * 9 / 5 + 32;
+}
+
+function convertToC(F){
+    return (F-32) * 5 / 9;
 }
 
 function createLocationForm(){

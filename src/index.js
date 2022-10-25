@@ -7,4 +7,3 @@ createLocationForm();
 
 createMainContainer();
 createWeatherCard("brooklyn");
-//createWeatherCard("Brooklyn");
