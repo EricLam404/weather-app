@@ -5,22 +5,44 @@ function createMainContainer(){
     const container = document.createElement('div');
     container.classList.add('main-container');
 
-    console.log("l");
     document.body.append(container);
 }
 
 async function createWeatherCard(city){
     const container = document.querySelector('.main-container');
 
-    console.log(container.firstChild);
+    if(container.firstChild){
+        container.removeChild(container.firstChild);
+    }
     const card = document.createElement('div');
     card.classList.add('card');
 
     const content = document.createElement('div');
-    content.classList.add('card-content');
+    content.classList.add("card-contents");
+
 
     let weather = await getWeatherCity(city);
 
+    if(weather){
+        let data = {
+            name: weather.name + ", " + weather.sys.country, 
+            weather: "Weather: " + weather.weather[0].main, 
+            temp: "Temperature: " + weather.main.temp, 
+            feels: "Feels like: " + weather.main.feels_like, 
+            humidity: "Humidity: " + weather.main.humidity, 
+            pressure: "Pressure: " + weather.main.pressure, 
+            windSpeed: "Wind Speed: " + weather.wind.speed, 
+            windDeg: "Wind Degrees: " + weather.wind.deg
+        };
+
+        for(const property in data){
+            let element = document.createElement('div');
+            element.classList.add(property);
+            element.textContent = data[property];
+            content.append(element);
+        }
+        console.log(content);
+    }
     console.log(weather);
     card.append(content);
     container.append(card);
