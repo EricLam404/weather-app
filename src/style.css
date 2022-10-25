@@ -5,7 +5,9 @@
 }
 
 body {
+    background-size: cover;
     background-color: aliceblue;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,7 +70,6 @@ body {
 }
 
 .card {
-    border: #333 1px solid;
     padding: 15px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 520;
